@@ -6,7 +6,7 @@ const usernameInput = document.getElementById('username');
 const messageBox = document.getElementById('messageBox');
 const messageText = document.getElementById('messageText');
 
-// Function to show custom message box
+
 function showMessageBox(message) {
     messageText.textContent = message;
     messageBox.style.display = 'block';
@@ -18,18 +18,16 @@ function showMessageBox(message) {
     }
 }
 
-// Function to close custom message box
 function closeMessageBox() {
     messageBox.style.display = 'none';
 }
 
-// Initialize theme based on localStorage or default to light
 const currentTheme = localStorage.getItem('theme');
 if (currentTheme) {
     body.classList.add(currentTheme);
     themeToggle.checked = currentTheme === 'dark';
 } else {
-    body.classList.add('light'); // Default to light mode
+    body.classList.add('light'); 
 }
 
 themeToggle.addEventListener('change', () => {
@@ -42,7 +40,7 @@ themeToggle.addEventListener('change', () => {
         body.classList.add('light');
         localStorage.setItem('theme', 'light');
     }
-    // Update message box style immediately on theme change
+    
     if (messageBox.style.display === 'block') {
         if (body.classList.contains('dark')) {
             messageBox.classList.add('dark-mode');
@@ -59,8 +57,8 @@ async function getProfile() {
         return;
     }
 
-    profileDiv.innerHTML = ''; // Clear previous profile data
-    loader.style.display = 'block'; // Show loader
+    profileDiv.innerHTML = ''; 
+    loader.style.display = 'block'; 
 
     try {
         const response = await fetch(`https://api.github.com/users/${username}`);
@@ -78,7 +76,7 @@ async function getProfile() {
         console.error('Error fetching GitHub profile:', error);
         showMessageBox(`Failed to fetch profile: ${error.message}. Please try again.`);
     } finally {
-        loader.style.display = 'none'; // Hide loader
+        loader.style.display = 'none'; 
     }
 }
 
@@ -121,8 +119,6 @@ function displayProfile(data) {
         </div>
     `;
 }
-
-// Handle Enter key press on the input field
 usernameInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
         getProfile();
